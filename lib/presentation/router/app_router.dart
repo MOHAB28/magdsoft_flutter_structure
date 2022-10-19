@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../screens/shared/splash_screen.dart';
+import '../screens/user/login_screen.dart';
 
 class Routes {
   static const String splashScreenKey = '/';
@@ -11,9 +12,9 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.splashScreenKey:
-        return MaterialPageRoute(builder: (_) => const SplashScreen());
-      // case Routes.loginScreenKey:
-      //   return MaterialPageRoute(builder: (_) => LoginScreen());
+        return CupertinoPageRoute(builder: (_) => const SplashScreen());
+      case Routes.loginScreenKey:
+        return CupertinoPageRoute(builder: (_) => const LoginScreen());
       default:
         return null;
     }
