@@ -1,5 +1,5 @@
 class LoginModel {
-  final String status;
+  final int status;
   final String message;
   final String code;
   const LoginModel({

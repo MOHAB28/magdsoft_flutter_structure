@@ -23,9 +23,25 @@ ThemeData getApplicationTheme() {
       ),
     ),
     textTheme: TextTheme(
+      titleMedium: getRegularStyle(
+        color: AppColors.white,
+        fontSize: FontSize.s20,
+      ),
       headlineLarge: getRegularStyle(
         color: AppColors.black,
         fontSize: FontSize.s30,
+      ),
+      displayMedium: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s20,
+      ),
+      displaySmall: getRegularStyle(
+        color: AppColors.black,
+        fontSize: FontSize.s16,
+      ),
+      labelSmall: getRegularStyle(
+        color: AppColors.blue,
+        fontSize: FontSize.s15,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(

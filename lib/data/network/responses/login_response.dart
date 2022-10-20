@@ -2,7 +2,7 @@ import '../../models/login_model.dart';
 
 class LoginResponse extends LoginModel {
   LoginResponse({
-    String? status,
+    int? status,
     String? message,
     String? code,
   }) : super(

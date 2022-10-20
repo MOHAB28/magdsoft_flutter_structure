@@ -13,7 +13,7 @@ part 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
-  static LoginCubit get(context) => BlocProvider.of(context);
+  static LoginCubit get(BuildContext context) => BlocProvider.of(context);
 
   Future<void> login(LoginRequest request) async {
     try {
@@ -27,7 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
       );
       if (response.statusCode == 200) {
         LoginResponse loginResponse = LoginResponse.fromJson(response.data);
-        if (loginResponse.status == '200') {
+        if (loginResponse.status == 200) {
           emit(LoginSucessState(loginResponse));
         } else {
           emit(LoginFailureState(loginResponse.message));
@@ -35,8 +35,10 @@ class LoginCubit extends Cubit<LoginState> {
       }
     } on DioError {
       debugPrint('error from dio');
+      emit(LoginFailureState(''));
     } catch (e) {
       debugPrint(e.toString());
+      emit(LoginFailureState(''));
     }
   }
 }
