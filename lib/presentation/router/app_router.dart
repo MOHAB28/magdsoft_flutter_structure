@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
 import '../screens/shared/splash_screen.dart';
-import '../screens/user/confirm_code_screen.dart';
 import '../screens/user/login_screen.dart';
 
 class Routes {
@@ -17,8 +16,8 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const SplashScreen());
       case Routes.loginScreenKey:
         return CupertinoPageRoute(builder: (_) => const LoginScreen());
-      case Routes.confirmCodeScreenKey:
-        return CupertinoPageRoute(builder: (_) => const ConfirmCodeScreen());
+      // case Routes.confirmCodeScreenKey:
+      //   return CupertinoPageRoute(builder: (_) => const ConfirmCodeScreen());
       default:
         return null;
     }

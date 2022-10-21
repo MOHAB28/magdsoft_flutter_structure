@@ -9,12 +9,14 @@ void showMyDialog({
   String message = '',
 }) {
   dismissDialog(context);
+
   showDialog(
+    barrierDismissible: false,
     context: context,
     builder: (context) => CustomDialogBuilder(
       state: state,
       message: message,
-      onPressed: () => dismissDialog(context),
+      onPressed: () => Navigator.pop(context),
     ),
   );
 }

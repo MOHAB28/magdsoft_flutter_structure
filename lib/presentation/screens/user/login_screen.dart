@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -6,12 +7,12 @@ import '../../../business_logic/login_cubit/login_cubit.dart';
 import '../../../constants/assets_manager.dart';
 import '../../../constants/strings_manager.dart';
 import '../../../data/network/requests/login_request.dart';
-import '../../router/app_router.dart';
 import '../../styles/colors.dart';
 import '../../view/custom_button_builder.dart';
 import '../../view/custom_text_field_builder.dart';
 import '../../widget/dialog.dart';
 import '../../widget/toast.dart';
+import 'confirm_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -58,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 44.0,
+                    horizontal: 20.0,
                     vertical: 25.0,
                   ),
                   child: Column(
@@ -99,9 +100,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           } else if (state is LoginSucessState) {
                             dismissDialog(context);
                             showToast(state.data.message);
-                            Navigator.pushReplacementNamed(
+                            Navigator.pushReplacement(
                               context,
-                              Routes.confirmCodeScreenKey,
+                              CupertinoPageRoute(
+                                builder: (context) => ConfirmCodeScreen(
+                                  name: _nameController.text.trim(),
+                                  phone: _nameController.text.trim(),
+                                ),
+                              ),
                             );
                           }
                         },

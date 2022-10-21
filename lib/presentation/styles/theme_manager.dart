@@ -6,11 +6,17 @@ import 'text_style.dart';
 
 ThemeData getApplicationTheme() {
   return ThemeData(
+    scaffoldBackgroundColor: AppColors.transparent,
     fontFamily: 'cairo',
-    appBarTheme: const AppBarTheme(
+    appBarTheme: AppBarTheme(
       elevation: 0.0,
+      centerTitle: true,
+      titleTextStyle: getRegularStyle(
+        color: AppColors.white,
+        fontSize: FontSize.s30,
+      ),
       backgroundColor: AppColors.transparent,
-      systemOverlayStyle: SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: AppColors.transparent,
         statusBarIconBrightness: Brightness.dark,
       ),

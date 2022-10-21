@@ -7,7 +7,7 @@ class CustomTextFormFieldBuilder extends StatelessWidget {
   const CustomTextFormFieldBuilder({
     Key? key,
     required TextEditingController controller,
-    required String hintText,
+    String hintText = '',
     TextInputType keyboardType = TextInputType.name,
     double borderRadius = 10.0,
   })  : _controller = controller,
