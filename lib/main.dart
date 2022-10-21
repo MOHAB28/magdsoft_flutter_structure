@@ -12,6 +12,7 @@ import 'business_logic/login_cubit/login_cubit.dart';
 import 'data/data_providers/local/cache_helper.dart';
 import 'data/data_providers/remote/dio_helper.dart';
 import 'presentation/router/app_router.dart';
+import 'presentation/services/notification_services.dart';
 import 'presentation/styles/theme_manager.dart';
 import 'presentation/widget/toast.dart';
 
@@ -22,6 +23,7 @@ Future<void> main() async {
   BlocOverrides.runZoned(
     () async {
       DioHelper.init();
+      await NotificationService().init();
       await CacheHelper.init();
       final locale =
           CacheHelper.getDataFromSharedPreference(key: 'language') ?? "en";

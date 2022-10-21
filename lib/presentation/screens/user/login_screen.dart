@@ -6,6 +6,7 @@ import '../../../business_logic/login_cubit/login_cubit.dart';
 import '../../../constants/assets_manager.dart';
 import '../../../constants/strings_manager.dart';
 import '../../../data/network/requests/login_request.dart';
+import '../../router/app_router.dart';
 import '../../styles/colors.dart';
 import '../../view/custom_button_builder.dart';
 import '../../view/custom_text_field_builder.dart';
@@ -98,6 +99,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           } else if (state is LoginSucessState) {
                             dismissDialog(context);
                             showToast(state.data.message);
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.confirmCodeScreenKey,
+                            );
                           }
                         },
                         child: CustomButtonBuilder(
