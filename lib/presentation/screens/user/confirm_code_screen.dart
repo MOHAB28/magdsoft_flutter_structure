@@ -14,11 +14,11 @@ import '../../widget/dialog.dart';
 import '../../widget/toast.dart';
 
 class ConfirmCodeScreen extends StatefulWidget {
-  final String name;
+  final String code;
   final String phone;
   const ConfirmCodeScreen({
     Key? key,
-    required this.name,
+    required this.code,
     required this.phone,
   }) : super(key: key);
 
@@ -49,7 +49,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
           appBar: AppBar(
             title: const Text(AppStrings.verPhone),
           ),
-          body: SingleChildScrollView(
+          body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -61,29 +61,34 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _firstController,
+                        autofocus: true,
+                        textAlign: TextAlign.center,
+                        onChanged: _onChanged,
                         keyboardType: TextInputType.number,
-                        textInputAction: _isFieldFull(_firstController),
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _sndController,
+                        textAlign: TextAlign.center,
+                        onChanged: _onChanged,
                         keyboardType: TextInputType.number,
-                        textInputAction: _isFieldFull(_sndController),
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
+                        textAlign: TextAlign.center,
                         controller: _thController,
                         keyboardType: TextInputType.number,
-                        textInputAction: _isFieldFull(_thController),
+                        onChanged: _onChanged,
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
+                        onChanged: _onChanged,
+                        textAlign: TextAlign.center,
                         controller: _foController,
                         keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.done,
                       ),
                     ),
                   ],
@@ -140,13 +145,13 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
   }
 
   void _notifyUser() {
-    notificationService.showNotifications(code: '1313');
+    notificationService.showNotifications(code: widget.code);
   }
 
-  TextInputAction _isFieldFull(TextEditingController controller) {
-    return controller.text.length == 1
-        ? TextInputAction.next
-        : TextInputAction.none;
+  void _onChanged(String value) {
+    if (value.length == 1) {
+      FocusScope.of(context).nextFocus();
+    }
   }
 
   @override

@@ -14,11 +14,11 @@ class VerifyPhoneRespone extends VerifyPhoneModel {
 
   factory VerifyPhoneRespone.fromJson(Map<String, dynamic> json) {
     return VerifyPhoneRespone(
-      message: json['message'],
-      status: json['status'],
+      message: json['message'] as String,
+      status: json['status'] as int,
       accountR: json['account'] != null
-      ? AccountResponse.fromJson(json['account'])
-      : null, 
+          ? AccountResponse.fromJson(json['account'])
+          : null,
     );
   }
 }
@@ -36,9 +36,9 @@ class AccountResponse extends AccountModel {
 
   factory AccountResponse.fromJson(Map<String, dynamic> json) {
     return AccountResponse(
-      id: json['id'],
-      name: json['name'],
-      phone: json['phone'],
+      id: json['id'] as int,
+      name: json['name'] as String,
+      phone: json['phone'] as String,
     );
   }
 }

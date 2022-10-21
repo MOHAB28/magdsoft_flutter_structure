@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               context,
                               CupertinoPageRoute(
                                 builder: (context) => ConfirmCodeScreen(
-                                  name: _nameController.text.trim(),
+                                  code: state.data.code,
                                   phone: _nameController.text.trim(),
                                 ),
                               ),
