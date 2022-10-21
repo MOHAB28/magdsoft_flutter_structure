@@ -1,11 +1,17 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../business_logic/verify_phone_cubit/verify_phone_cubit.dart';
+import '../../../data/network/requests/verify_phone_request.dart';
+import '../../view/custom_button_builder.dart';
 import '../../view/custom_text_field_builder.dart';
 import '../../../constants/strings_manager.dart';
 import '../../services/notification_services.dart';
 import '../../view/scaffold_background_builder.dart';
+import '../../widget/dialog.dart';
+import '../../widget/toast.dart';
 
 class ConfirmCodeScreen extends StatefulWidget {
   final String name;
@@ -46,6 +52,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Row(
@@ -54,24 +61,75 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _firstController,
+                        keyboardType: TextInputType.number,
+                        textInputAction: _isFieldFull(_firstController),
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _sndController,
+                        keyboardType: TextInputType.number,
+                        textInputAction: _isFieldFull(_sndController),
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _thController,
+                        keyboardType: TextInputType.number,
+                        textInputAction: _isFieldFull(_thController),
                       ),
                     ),
                     Expanded(
                       child: CustomTextFormFieldBuilder(
                         controller: _foController,
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.done,
                       ),
                     ),
                   ],
+                ),
+                TextButton(
+                  child: const Text(AppStrings.resendCode),
+                  onPressed: () async {
+                    await Future.delayed(const Duration(seconds: 2));
+                    _notifyUser();
+                  },
+                ),
+                BlocListener<VerifyPhoneCubit, VerifyPhoneState>(
+                  listener: (context, state) {
+                    if (state is VerifyPhoneLoading) {
+                      showMyDialog(
+                        context: context,
+                        state: StateController.loading,
+                      );
+                    } else if (state is VerifyPhoneFialure) {
+                      showMyDialog(
+                        context: context,
+                        state: StateController.error,
+                        message: state.message,
+                      );
+                    } else if (state is VerifyPhoneSuccess) {
+                      dismissDialog(context);
+                      showToast(state.data.message);
+                    }
+                  },
+                  child: CustomButtonBuilder(
+                    onTap: () {
+                      if (_firstController.text.isNotEmpty ||
+                          _sndController.text.isNotEmpty ||
+                          _thController.text.isNotEmpty ||
+                          _foController.text.isNotEmpty) {
+                        VerifyPhoneCubit.get(context).sendOtp(
+                          VerifyPhoneRequest(
+                            code:
+                                '${_firstController.text.trim()}${_sndController.text.trim()}${_thController.text.trim()}${_foController.text.trim()}',
+                            phone: widget.phone,
+                          ),
+                        );
+                      }
+                    },
+                    title: AppStrings.verify,
+                  ),
                 ),
               ],
             ),
@@ -83,6 +141,12 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
 
   void _notifyUser() {
     notificationService.showNotifications(code: '1313');
+  }
+
+  TextInputAction _isFieldFull(TextEditingController controller) {
+    return controller.text.length == 1
+        ? TextInputAction.next
+        : TextInputAction.none;
   }
 
   @override

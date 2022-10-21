@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'business_logic/bloc_observer.dart';
 import 'business_logic/global_cubit/global_cubit.dart';
 import 'business_logic/login_cubit/login_cubit.dart';
+import 'business_logic/verify_phone_cubit/verify_phone_cubit.dart';
 import 'data/data_providers/local/cache_helper.dart';
 import 'data/data_providers/remote/dio_helper.dart';
 import 'presentation/router/app_router.dart';
@@ -73,11 +74,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<GlobalCubit>(
           create: ((context) => GlobalCubit()),
         ),
-        BlocProvider(
+        BlocProvider<LoginCubit>(
           create: ((context) => LoginCubit()),
+        ),
+        BlocProvider<VerifyPhoneCubit>(
+          create: (_) => VerifyPhoneCubit(),
         ),
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(

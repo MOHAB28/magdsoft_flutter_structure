@@ -15,7 +15,7 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
 
   static VerifyPhoneCubit get(BuildContext context) => BlocProvider.of(context);
 
-  Future<void> login(VerifyPhoneRequest request) async {
+  Future<void> sendOtp(VerifyPhoneRequest request) async {
     try {
       emit(VerifyPhoneLoading());
       final response = await DioHelper.postData(

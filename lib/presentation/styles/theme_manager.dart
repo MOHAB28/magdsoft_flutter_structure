@@ -28,6 +28,11 @@ ThemeData getApplicationTheme() {
         borderRadius: BorderRadius.circular(40.0),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(AppColors.blue),
+      ),
+    ),
     textTheme: TextTheme(
       titleMedium: getRegularStyle(
         color: AppColors.white,
