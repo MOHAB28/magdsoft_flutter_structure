@@ -8,7 +8,6 @@ import '../../../data/models/home_model.dart';
 import '../../styles/colors.dart';
 import '../../view/custom_text_field_builder.dart';
 import '../../view/product_card_item_builder.dart';
-import '../../view/scaffold_background_builder.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

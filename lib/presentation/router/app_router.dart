@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../screens/shared/home_screen.dart';
 import '../screens/shared/layout_screen.dart';
 import '../screens/shared/splash_screen.dart';
 import '../screens/user/login_screen.dart';
