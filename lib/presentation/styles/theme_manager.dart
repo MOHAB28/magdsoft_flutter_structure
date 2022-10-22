@@ -37,6 +37,9 @@ ThemeData getApplicationTheme() {
         color: AppColors.white,
         fontSize: FontSize.s20,
       ),
+      titleSmall: getRegularStyle(
+        color: AppColors.black,
+      ),
       headlineLarge: getRegularStyle(
         color: AppColors.black,
         fontSize: FontSize.s30,
@@ -56,6 +59,7 @@ ThemeData getApplicationTheme() {
     ),
     inputDecorationTheme: InputDecorationTheme(
       hintStyle: getRegularStyle(color: AppColors.grey),
+      suffixIconColor: AppColors.grey,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.0),
         borderSide: BorderSide.none,

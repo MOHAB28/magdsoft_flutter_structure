@@ -119,14 +119,20 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                     } else if (state is VerifyPhoneSuccess) {
                       dismissDialog(context);
                       WidgetsBinding.instance.addPostFrameCallback(
-                          (_) => showToast(state.data.message, context));
+                        (_) => showToast(
+                          state.data.message,
+                          context,
+                        ),
+                      );
                       CacheHelper.saveDataSharedPreference(
                         key: isLoggedIn,
                         value: true,
                       ).then((value) {
                         if (value) {
                           Navigator.pushReplacementNamed(
-                              context, Routes.homeScreenKey);
+                            context,
+                            Routes.homeScreenKey,
+                          );
                         }
                       });
                     }

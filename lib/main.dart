@@ -8,6 +8,7 @@ import 'package:sizer/sizer.dart';
 
 import 'business_logic/bloc_observer.dart';
 import 'business_logic/global_cubit/global_cubit.dart';
+import 'business_logic/home_cubit/home_cubit.dart';
 import 'business_logic/login_cubit/login_cubit.dart';
 import 'business_logic/verify_phone_cubit/verify_phone_cubit.dart';
 import 'data/data_providers/local/cache_helper.dart';
@@ -82,6 +83,9 @@ class _MyAppState extends State<MyApp> {
         ),
         BlocProvider<VerifyPhoneCubit>(
           create: (_) => VerifyPhoneCubit(),
+        ),
+        BlocProvider<HomeCubit>(
+          create: (_) => HomeCubit(),
         ),
       ],
       child: BlocConsumer<GlobalCubit, GlobalState>(
