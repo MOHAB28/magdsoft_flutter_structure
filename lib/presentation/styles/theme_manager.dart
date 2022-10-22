@@ -33,6 +33,10 @@ ThemeData getApplicationTheme() {
       ),
     ),
     textTheme: TextTheme(
+      titleLarge: getBoldStyle(
+        color: AppColors.white,
+        fontSize: FontSize.s24,
+      ),
       titleMedium: getRegularStyle(
         color: AppColors.white,
         fontSize: FontSize.s20,
@@ -43,6 +47,14 @@ ThemeData getApplicationTheme() {
       headlineLarge: getRegularStyle(
         color: AppColors.black,
         fontSize: FontSize.s30,
+      ),
+      headlineSmall: getRegularStyle(
+        color: AppColors.white,
+        fontSize: FontSize.s15,
+      ),
+      bodySmall: getRegularStyle(
+        color: AppColors.grey,
+        fontSize: FontSize.s16,
       ),
       displayMedium: getRegularStyle(
         color: AppColors.black,

@@ -9,6 +9,7 @@ class Routes {
   static const String loginScreenKey = '/login';
   static const String confirmCodeScreenKey = '/comfirm_code';
   static const String layoutScreenKey = '/layout';
+  // static const String productDetailsScreenKey = '/ProductDetails';
 }
 
 class AppRouter {
@@ -20,6 +21,8 @@ class AppRouter {
         return CupertinoPageRoute(builder: (_) => const LoginScreen());
       case Routes.layoutScreenKey:
         return CupertinoPageRoute(builder: (_) => const LayoutScreen());
+      // case Routes.productDetailsScreenKey:
+      //   return CupertinoPageRoute(builder: (_) => const ProductDetails());
       default:
         return null;
     }
