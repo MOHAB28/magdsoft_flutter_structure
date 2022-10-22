@@ -8,8 +8,8 @@ class HelpInitial extends HelpState {}
 class HelpLoadingState extends HelpState {}
 
 class HelpSucessState extends HelpState {
-  // final List<ProductModel> products;
-  // HelpSucessState(this.products);
+  final List<HelpItems> products;
+  HelpSucessState(this.products);
 }
 
 class HelpFailureState extends HelpState {

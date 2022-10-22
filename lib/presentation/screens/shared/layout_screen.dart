@@ -22,7 +22,11 @@ class _LayoutScreenState extends State<LayoutScreen> {
             var cubit = GlobalCubit.get(context);
             return Scaffold(
               extendBody: true,
-              appBar: AppBar(toolbarHeight: 0),
+              appBar: cubit.titles[cubit.currentIndex].isEmpty
+              ? AppBar(toolbarHeight: 0)
+              : AppBar(
+                title: Text(cubit.titles[cubit.currentIndex]),
+              ),
               body: cubit.screens[cubit.currentIndex],
               floatingActionButton: FloatingActionButton(
                 onPressed: () {
