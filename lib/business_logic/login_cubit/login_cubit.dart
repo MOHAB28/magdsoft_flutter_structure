@@ -19,7 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       emit(LoginLoadingState());
       final response = await DioHelper.postData(
-        url: verifyPhoneEndPoint,
+        url: '$api$verifyPhoneEndPoint',
         body: {
           'name': request.name,
           'phone': request.phone,

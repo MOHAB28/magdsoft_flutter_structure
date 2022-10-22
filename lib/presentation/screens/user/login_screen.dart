@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../business_logic/login_cubit/login_cubit.dart';
-import '../../../business_logic/verify_phone_cubit/verify_phone_cubit.dart';
 import '../../../constants/assets_manager.dart';
 import '../../../constants/strings_manager.dart';
 import '../../../data/network/requests/login_request.dart';
@@ -100,13 +99,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           } else if (state is LoginSucessState) {
                             dismissDialog(context);
-                            showToast(state.data.message);
+                            showToast(state.data.message,context);
                             Navigator.pushReplacement(
                               context,
                               CupertinoPageRoute(
                                 builder: (context) => ConfirmCodeScreen(
                                   code: state.data.code,
-                                  phone: _nameController.text.trim(),
+                                  phone: _phoneController.text.trim(),
                                 ),
                               ),
                             );
@@ -117,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             if (_nameController.text.trim().isEmpty ||
                                 _phoneController.text.trim().isEmpty) {
-                              showToast('Please, Fill your data!');
+                              showToast('Please, Fill your data!',context);
                             } else {
                               LoginCubit.get(context).login(
                                 LoginRequest(

@@ -115,7 +115,8 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       );
                     } else if (state is VerifyPhoneSuccess) {
                       dismissDialog(context);
-                      showToast(state.data.message);
+                      WidgetsBinding.instance.addPostFrameCallback(
+                          (_) => showToast(state.data.message, context));
                     }
                   },
                   child: CustomButtonBuilder(
@@ -126,8 +127,10 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                           _foController.text.isNotEmpty) {
                         VerifyPhoneCubit.get(context).sendOtp(
                           VerifyPhoneRequest(
-                            code:
-                                '${_firstController.text.trim()}${_sndController.text.trim()}${_thController.text.trim()}${_foController.text.trim()}',
+                            code: _firstController.text.trim() +
+                                _sndController.text.trim() +
+                                _thController.text.trim() +
+                                _foController.text.trim(),
                             phone: widget.phone,
                           ),
                         );

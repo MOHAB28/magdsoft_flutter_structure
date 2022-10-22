@@ -4,7 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../styles/colors.dart';
 
 final FToast fToast = FToast();
-void showToast(String? text) {
+void showToast(String? text,BuildContext context) {
+  fToast.context = context;
   Widget toast = Container(
     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
     decoration: BoxDecoration(
@@ -13,7 +14,6 @@ void showToast(String? text) {
     ),
     child: Text(text!),
   );
-
   fToast.showToast(
     child: toast,
     gravity: ToastGravity.TOP,

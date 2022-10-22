@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class VerifyPhoneCubit extends Cubit<VerifyPhoneState> {
     try {
       emit(VerifyPhoneLoading());
       final response = await DioHelper.postData(
-        url: otpEndPoint,
+        url: '$api$otpEndPoint',
         body: {
           'code': request.code,
           'phone': request.phone,
