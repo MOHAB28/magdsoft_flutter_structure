@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
     bool? isLogged =
         await CacheHelper.getDataFromSharedPreference(key: isLoggedIn);
     if (isLogged != null) {
-      Navigator.pushReplacementNamed(context, Routes.homeScreenKey);
+      Navigator.pushReplacementNamed(context, Routes.layoutScreenKey);
     } else {
       Navigator.pushReplacementNamed(context, Routes.loginScreenKey);
     }

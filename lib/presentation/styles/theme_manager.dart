@@ -73,5 +73,12 @@ ThemeData getApplicationTheme() {
         borderSide: BorderSide.none,
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.white.withAlpha(0),
+      elevation: 0.0,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: AppColors.blue,
+      unselectedItemColor: AppColors.grey,
+    ),
   );
 }

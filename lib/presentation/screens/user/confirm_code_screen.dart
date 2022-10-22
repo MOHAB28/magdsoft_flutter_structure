@@ -131,7 +131,7 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                         if (value) {
                           Navigator.pushReplacementNamed(
                             context,
-                            Routes.homeScreenKey,
+                            Routes.layoutScreenKey,
                           );
                         }
                       });

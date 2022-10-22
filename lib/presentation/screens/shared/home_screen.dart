@@ -27,25 +27,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        const ScaffoldBackGroundBuilder(),
-        Scaffold(
-          appBar: AppBar(toolbarHeight: 0),
-          body: BlocBuilder<HomeCubit, HomeState>(
-            builder: (context, state) {
-              if (state is HomeLoadingState) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is HomeSucessState) {
-                return _getContentWidget(state.products);
-              } else if (state is HomeFailureState) {
-                return _getErrorContent(state.message);
-              }
-              return const SizedBox();
-            },
-          ),
-        ),
-      ],
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is HomeSucessState) {
+          return _getContentWidget(state.products);
+        } else if (state is HomeFailureState) {
+          return _getErrorContent(state.message);
+        }
+        return const SizedBox();
+      },
     );
   }
 
@@ -60,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SingleChildScrollView _getContentWidget(List<ProductModel> products) {
+  Widget _getContentWidget(List<ProductModel> products) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       physics: const BouncingScrollPhysics(),
@@ -87,7 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
               childAspectRatio: 3 / 4.3,
             ),
             itemBuilder: (ctx, i) {
-              return ProductCardItemBuilder(product: products[i],index: i,);
+              return ProductCardItemBuilder(
+                product: products[i],
+                index: i,
+              );
             },
           ),
         ],
