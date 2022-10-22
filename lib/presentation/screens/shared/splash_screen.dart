@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:magdsoft_flutter_structure/constants/keys.dart';
+import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 
 import '../../../constants/assets_manager.dart';
 import '../../router/app_router.dart';
@@ -37,7 +39,13 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  void _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.loginScreenKey);
+  void _goNext() async {
+    bool? isLogged =
+        await CacheHelper.getDataFromSharedPreference(key: isLoggedIn);
+    if (isLogged != null) {
+      Navigator.pushReplacementNamed(context, Routes.homeScreenKey);
+    } else {
+      Navigator.pushReplacementNamed(context, Routes.loginScreenKey);
+    }
   }
 }

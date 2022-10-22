@@ -1,0 +1,1 @@
+const String isLoggedIn = 'Is user loggerd in';

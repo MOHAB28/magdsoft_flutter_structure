@@ -7,7 +7,6 @@ import 'text_style.dart';
 ThemeData getApplicationTheme() {
   return ThemeData(
     scaffoldBackgroundColor: AppColors.transparent,
-    fontFamily: 'cairo',
     appBarTheme: AppBarTheme(
       elevation: 0.0,
       centerTitle: true,

@@ -2,9 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:magdsoft_flutter_structure/data/data_providers/local/cache_helper.dart';
 
 import '../../../business_logic/verify_phone_cubit/verify_phone_cubit.dart';
+import '../../../constants/keys.dart';
 import '../../../data/network/requests/verify_phone_request.dart';
+import '../../router/app_router.dart';
 import '../../view/custom_button_builder.dart';
 import '../../view/custom_text_field_builder.dart';
 import '../../../constants/strings_manager.dart';
@@ -117,6 +120,15 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                       dismissDialog(context);
                       WidgetsBinding.instance.addPostFrameCallback(
                           (_) => showToast(state.data.message, context));
+                      CacheHelper.saveDataSharedPreference(
+                        key: isLoggedIn,
+                        value: true,
+                      ).then((value) {
+                        if (value) {
+                          Navigator.pushReplacementNamed(
+                              context, Routes.homeScreenKey);
+                        }
+                      });
                     }
                   },
                   child: CustomButtonBuilder(
