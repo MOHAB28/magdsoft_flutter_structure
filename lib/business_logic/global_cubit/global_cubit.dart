@@ -50,4 +50,11 @@ class GlobalCubit extends Cubit<GlobalState> {
     ids.remove(id);
     emit(RemoveFromSelectedItemsState());
   }
+
+  List<String> names = ['All'];
+  void addToSelectedNames(String name) {
+    names = [];
+    names.add(name);
+    emit(SelectedCatState());
+  }
 }

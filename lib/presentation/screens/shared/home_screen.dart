@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../business_logic/global_cubit/global_cubit.dart';
 import '../../../business_logic/home_cubit/home_cubit.dart';
 import '../../../constants/assets_manager.dart';
 import '../../../constants/strings_manager.dart';
+import '../../../data/models/categories_model.dart';
 import '../../../data/models/home_model.dart';
 import '../../styles/colors.dart';
 import '../../view/custom_text_field_builder.dart';
@@ -61,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const HomeHaederBuilder(),
           const SizedBox(height: 22.0),
           const CarouselSliderBuilder(),
-          const SizedBox(height: 22.0),
+          const HorizontalListViewBuilder(),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -80,6 +82,78 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class HorizontalListViewBuilder extends StatelessWidget {
+  const HorizontalListViewBuilder({
+    Key? key,
+  }) : super(key: key);
+
+  final List<CategoriesModel> categories = const [
+    CategoriesModel(name: 'All', image: ImageAssets.cup),
+    CategoriesModel(name: 'Acer', image: ImageAssets.predator),
+    CategoriesModel(name: 'Razer', image: ImageAssets.razer),
+    CategoriesModel(name: 'Apple', image: ImageAssets.ios),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 80.0,
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: BlocBuilder<GlobalCubit, GlobalState>(builder: (context, state) {
+          var cubit = GlobalCubit.get(context);
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: categories
+                .map(
+                  (e) => GestureDetector(
+                    onTap: () {
+                      cubit.addToSelectedNames(e.name);
+                    },
+                    child: Card(
+                      color: cubit.names.contains(e.name)
+                          ? AppColors.blue
+                          : AppColors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12.0, vertical: 6.0),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              height: 40.0,
+                              width: 40.0,
+                              child: Card(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Center(child: Image.asset(e.image)),
+                              ),
+                            ),
+                            const SizedBox(width: 15.0),
+                            Text(
+                              e.name,
+                              style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                                color:  cubit.names.contains(e.name)
+                          ? AppColors.white
+                          : AppColors.black,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          );
+        }),
       ),
     );
   }
