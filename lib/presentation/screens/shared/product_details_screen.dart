@@ -95,7 +95,17 @@ class ProductDetails extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height:16.0)
+                const SizedBox(height: 16.0),
+                const Divider(
+                  color: AppColors.black,
+                  indent: 20.0,
+                  endIndent: 20.0,
+                ),
+                const SizedBox(height: 16.0),
+                Text(
+                  product.description,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
               ],
             ),
           ),

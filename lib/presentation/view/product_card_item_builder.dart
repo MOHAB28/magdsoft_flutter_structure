@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
 import '../../data/models/home_model.dart';
-import '../router/app_router.dart';
 import '../screens/shared/product_details_screen.dart';
 
 class ProductCardItemBuilder extends StatelessWidget {

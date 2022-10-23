@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,13 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           const HomeHaederBuilder(),
           const SizedBox(height: 22.0),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: const Image(
-              height: 175.0,
-              image: AssetImage(ImageAssets.acer),
-            ),
-          ),
+          const CarouselSliderBuilder(),
           const SizedBox(height: 22.0),
           GridView.builder(
             shrinkWrap: true,
@@ -85,6 +80,43 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CarouselSliderBuilder extends StatelessWidget {
+  const CarouselSliderBuilder({
+    Key? key,
+  }) : super(key: key);
+
+  final List<String> images = const [
+    ImageAssets.acer,
+    ImageAssets.carosel,
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      items: images
+          .map(
+            (e) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15.0),
+                child: Image(
+                  height: 175.0,
+                  fit: BoxFit.cover,
+                  image: AssetImage(e),
+                ),
+              ),
+            ),
+          )
+          .toList(),
+      options: CarouselOptions(
+        height: 190.0,
+        viewportFraction: 1,
+        autoPlay: true,
+        enableInfiniteScroll: true,
       ),
     );
   }

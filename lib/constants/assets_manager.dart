@@ -9,5 +9,6 @@ class ImageAssets {
   static const String predator = '$imagePath/predator.png';
   static const String acer = '$imagePath/Acer_header.png';
   static const String razer = '$imagePath/razer.png';
+  static const String carosel = '$imagePath/carosel.png';
   static const String loginBackground = '$imagePath/login_background.png';
 }
