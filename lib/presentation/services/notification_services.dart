@@ -1,6 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-
+// Setup notification for notify the user with verification code after logging in
 class NotificationService {
   //NotificationService a singleton object
   static final NotificationService _notificationService =

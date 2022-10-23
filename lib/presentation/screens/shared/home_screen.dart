@@ -60,27 +60,58 @@ class _HomeScreenState extends State<HomeScreen> {
       physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
+          // The TextField and filter button in the top of the screen
           const HomeHaederBuilder(),
           const SizedBox(height: 22.0),
           const CarouselSliderBuilder(),
+
+          // Categories buttons
           const HorizontalListViewBuilder(),
-          GridView.builder(
+
+          // Home products view
+          ListView.builder(
+            itemCount: products.length - 1,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: products.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16.0,
-              crossAxisSpacing: 16.0,
-              childAspectRatio: 3 / 4.3,
-            ),
             itemBuilder: (ctx, i) {
-              return ProductCardItemBuilder(
-                product: products[i],
-                index: i,
-              );
+              return i.isEven
+                  ? Row(
+                      children: [
+                        Flexible(
+                          child: ProductCardItemBuilder(
+                            product: products[i],
+                            index: i,
+                          ),
+                        ),
+                        Flexible(
+                          child: ProductCardItemBuilder(
+                            product: products[i + 1],
+                            index: i + 1,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox();
             },
           ),
+          // GridView.builder(
+          //   shrinkWrap: true,
+          //   physics: const NeverScrollableScrollPhysics(),
+          //   itemCount: products.length,
+          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: 2,
+          //     // mainAxisSpacing: 16.0,
+          //     crossAxisSpacing: 16.0,
+          //     childAspectRatio: (MediaQuery.of(context).size.width /
+          //         (MediaQuery.of(context).size.height / 1.2)),
+          //   ),
+          //   itemBuilder: (ctx, i) {
+          //     return ProductCardItemBuilder(
+          //       product: products[i],
+          //       index: i,
+          //     );
+          //   },
+          // ),
         ],
       ),
     );
@@ -139,11 +170,14 @@ class HorizontalListViewBuilder extends StatelessWidget {
                             const SizedBox(width: 15.0),
                             Text(
                               e.name,
-                              style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                                color:  cubit.names.contains(e.name)
-                          ? AppColors.white
-                          : AppColors.black,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                    color: cubit.names.contains(e.name)
+                                        ? AppColors.white
+                                        : AppColors.black,
+                                  ),
                             )
                           ],
                         ),

@@ -28,7 +28,12 @@ class _HelpScreenState extends State<HelpScreen> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is HelpSucessState) {
           return SingleChildScrollView(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(
+              left: 20.0,
+              right: 20.0,
+              top: 20.0,
+              bottom: 70.0,
+            ),
             child: Column(
               children: state.products
                   .map(

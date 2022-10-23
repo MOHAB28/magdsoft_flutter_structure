@@ -11,8 +11,10 @@ class GlobalCubit extends Cubit<GlobalState> {
 
   static GlobalCubit get(context) => BlocProvider.of(context);
 
+  // Bottom nav current index
   int currentIndex = 2;
 
+  // Bottom nav app bar titles
   List<String> titles = [
     'Help',
     'Notification',
@@ -21,6 +23,7 @@ class GlobalCubit extends Cubit<GlobalState> {
     'Exit',
   ];
 
+  // Bottom nav views
   List<Widget> screens = const [
     HelpScreen(),
     Center(
@@ -35,22 +38,29 @@ class GlobalCubit extends Cubit<GlobalState> {
     ),
   ];
 
+  // Change bottom nav index
   void changeIndex(int index) {
     currentIndex = index;
     emit(ChangeBottomNavState());
   }
 
+  // Handle help card buttton onTap at help view
+  // add the id of selected card to open it
   List<int> ids = [];
   void addToSelectedIds(int id) {
     ids.add(id);
     emit(AddToSelectedItemsState());
   }
 
+  // remove the id of selected card to close it
   void remvoeFromSelectedIds(int id) {
     ids.remove(id);
     emit(RemoveFromSelectedItemsState());
   }
 
+  // Handle the selected category button onTap at home view.
+  // when user pressed the button this method remove all items then
+  // add the selected name 
   List<String> names = ['All'];
   void addToSelectedNames(String name) {
     names = [];

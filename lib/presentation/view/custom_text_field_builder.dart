@@ -3,6 +3,7 @@ import '../../constants/font_manager.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
+// Reusable component for shared TextFormFeild
 class CustomTextFormFieldBuilder extends StatelessWidget {
   const CustomTextFormFieldBuilder({
     Key? key,

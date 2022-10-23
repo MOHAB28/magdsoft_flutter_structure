@@ -21,9 +21,11 @@ void showMyDialog({
   );
 }
 
+// This function make sure if a dialog is opened
 bool _isCurrentDialogShowing(BuildContext context) =>
     ModalRoute.of(context)?.isCurrent != true;
 
+// if a dialog is opened then close it
 void dismissDialog(BuildContext context) {
   if (_isCurrentDialogShowing(context)) {
     Navigator.of(context, rootNavigator: true).pop(true);

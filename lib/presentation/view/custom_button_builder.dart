@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
 
+// Reusable component for a gradient buttonn
 class CustomButtonBuilder extends StatelessWidget {
   const CustomButtonBuilder({
     Key? key,

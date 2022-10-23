@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../styles/colors.dart';
 
+
+// Scaffold gradient background
 class ScaffoldBackGroundBuilder extends StatelessWidget {
   const ScaffoldBackGroundBuilder({
     Key? key,

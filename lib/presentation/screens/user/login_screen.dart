@@ -81,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextFormFieldBuilder(
                         controller: _phoneController,
                         hintText: AppStrings.phoneHintText,
+                        textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.phone,
                       ),
                       const SizedBox(height: 40.0),
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
                           } else if (state is LoginSucessState) {
                             dismissDialog(context);
-                            showToast(state.data.message,context);
+                            showToast(state.data.message, context);
                             Navigator.pushReplacement(
                               context,
                               CupertinoPageRoute(
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             if (_nameController.text.trim().isEmpty ||
                                 _phoneController.text.trim().isEmpty) {
-                              showToast('Please, Fill your data!',context);
+                              showToast('Please, Fill your data!', context);
                             } else {
                               LoginCubit.get(context).login(
                                 LoginRequest(

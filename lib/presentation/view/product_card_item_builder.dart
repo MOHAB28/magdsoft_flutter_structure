@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:magdsoft_flutter_structure/presentation/styles/colors.dart';
 
+import '../styles/colors.dart';
 import '../../data/models/home_model.dart';
 import '../screens/shared/product_details_screen.dart';
 
+// Prouct card to view products at home view
 class ProductCardItemBuilder extends StatelessWidget {
   const ProductCardItemBuilder({
     Key? key,
@@ -16,11 +17,51 @@ class ProductCardItemBuilder extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    if (index == 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Recomnded For You',
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+          ProductCard(
+            product: product,
+          ),
+        ],
+      );
+    }
+    return SizedBox(
+      height: index == 1 ? null : 255.0,
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment:
+            index % 2 == 0 ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          ProductCard(
+            product: product,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  const ProductCard({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+  final ProductModel product;
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
         CupertinoPageRoute(
-            builder: (context) => ProductDetails(product: product)),
+          builder: (context) => ProductDetails(product: product),
+        ),
       ),
       child: Card(
         shape: RoundedRectangleBorder(
@@ -76,7 +117,6 @@ class ProductCardItemBuilder extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Row(
